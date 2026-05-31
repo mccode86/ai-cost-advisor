@@ -6,15 +6,12 @@ import json
 load_dotenv()
 client = Anthropic()
 
-
 def load_logs(path: Path) -> str:
     with open(path, "r") as f:
         data = json.load(f)
     return json.dumps(data, indent=2)
 
-
 history = []
-
 
 def chat(message: str, logs: str):
     history.append({"role": "user", "content": message})
@@ -34,7 +31,6 @@ def chat(message: str, logs: str):
         print()
         reply = stream.get_final_text()
     history.append({"role": "assistant", "content": reply})
-
 
 system_logs = load_logs("../project_1_api_logger/calls.json")
 
